@@ -538,19 +538,24 @@ class Room(object):
         self.lock_list = pygame.sprite.Group()
         self.bombs_items_list = pygame.sprite.Group()
         self.dungeon = False
+    def populate(self, lst, wall_or_door):
+        if wall_or_door == "wall":
+            self.wall_list = pygame.sprite.Group(lst)
+        if wall_or_door == "door":
+            self.door_list = pygame.sprite.Group(lst)
 
-class Room1(Room):
-    def __init__(self):
-        Room.__init__(self)
-        walls = [Wall(0,0,TreeImg), Wall(256,0,TreeImg),Wall(500,0,TreeImg), Wall((900-256),0,TreeImg), Wall(-160,113,TreeImg),
-                 Wall(-160,226,TreeImg),Wall(-160,440,TreeImg), Wall(-160, 553,TreeImg),
-                 Wall((900-150),113,TreeImg),Wall((900-150),226,TreeImg), Water((800-216),443, Water1),Wall(700,0,TreeImg),
-                 Wall(75,553,TreeImg),Wall(200,553,TreeImg),Wall(330,553,TreeImg)]
-        doors = [Door(300,66)]
-        for wall in walls:
-            self.wall_list.add(wall)
-        for door in doors:
-            self.door_list.add(door)
+
+
+room1 = Room();
+room1.walls = [Wall(0,0,TreeImg), Wall(256,0,TreeImg),Wall(500,0,TreeImg), Wall((900-256),0,TreeImg), Wall(-160,113,TreeImg),
+         Wall(-160,226,TreeImg),Wall(-160,440,TreeImg), Wall(-160, 553,TreeImg),
+         Wall((900-150),113,TreeImg),Wall((900-150),226,TreeImg), Water((800-216),443, Water1),Wall(700,0,TreeImg),
+         Wall(75,553,TreeImg),Wall(200,553,TreeImg),Wall(330,553,TreeImg)]
+room1.doors = [Door(300,66)]
+room1.populate(room1.walls, "wall")
+print(room1.walls)
+room1.populate(room1.doors, "door")
+
 class Room2(Room):
     def __init__(self):
         Room.__init__(self)
@@ -702,7 +707,7 @@ class GameMain():
         self.link = Link(200,500,"UP",False,False,False,False,False,False,False)
         self.all_sprite_list = pygame.sprite.Group()
         self.all_sprite_list.add(self.link)
-        self.rooms = [[Room3(),Room1(),Room2()],
+        self.rooms = [[Room3(),room1,Room2()],
                       [Room6(),Room4(), Room5()],
                       [Room7(),Dungeon(),Dungeon2(),FINAL_DUNGEON()]]
         self.current_x = 1
