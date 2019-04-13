@@ -1,5 +1,7 @@
 import pygame,random,math
 from pygame.locals import *
+from Room1 import build_room_1
+from Room2 import build_room_2
 TreeImg = pygame.image.load("assets/overworld/trees.png")
 TreeImg2 = pygame.image.load("assets/overworld/single_trees.png")
 TreeImg3 = pygame.image.load("assets/overworld/single_tree.png")
@@ -524,6 +526,7 @@ class Lock(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
 class Room(object):
     wall_list = None
     def __init__(self):
@@ -544,36 +547,8 @@ class Room(object):
         if wall_or_door == "door":
             self.door_list = pygame.sprite.Group(lst)
 
-
-
-room1 = Room();
-room1.walls = [Wall(0,0,TreeImg), Wall(256,0,TreeImg),Wall(500,0,TreeImg), Wall((900-256),0,TreeImg), Wall(-160,113,TreeImg),
-         Wall(-160,226,TreeImg),Wall(-160,440,TreeImg), Wall(-160, 553,TreeImg),
-         Wall((900-150),113,TreeImg),Wall((900-150),226,TreeImg), Water((800-216),443, Water1),Wall(700,0,TreeImg),
-         Wall(75,553,TreeImg),Wall(200,553,TreeImg),Wall(330,553,TreeImg)]
-room1.doors = [Door(300,66)]
-room1.populate(room1.walls, "wall")
-print(room1.walls)
-room1.populate(room1.doors, "door")
-
-class Room2(Room):
-    def __init__(self):
-        Room.__init__(self)
-        walls = [Water(0,443, Water2),Wall(213,500,TreeImg), Wall(326,500,TreeImg),
-                 Rock(0,0,False,RockImg),Rock(-500,120,False,RockImg),Rock(-500,200,False,RockImg), Wall(439,500,TreeImg),Wall(551,500,TreeImg),
-                 Wall(750,0,TreeImg),Wall(750, 339,TreeImg),Wall(750,451,TreeImg),Wall(750,113,TreeImg),
-                  Wall(750,226,TreeImg)]
-        mobs = [Mob(400,200,5,self),Mob(500,300,5,self),Mob(500,400,5,self)]
-        self.keys = [Key(300,300)]
-        for wall in walls:
-            self.wall_list.add(wall)
-        for mob in mobs:
-            mob.walls = self.wall_list
-            self.mob_list.add(mob)
-        for key in self.keys:
-            self.key_list.add(key)
-
-
+room1 = build_room_1()
+room2 = build_room_2()
 
 class Room3(Room):
     def __init__(self):
