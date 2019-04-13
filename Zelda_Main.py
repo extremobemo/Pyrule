@@ -1,34 +1,34 @@
 import pygame,random,math
 from pygame.locals import *
-TreeImg = pygame.image.load("overworld/trees.png")
-TreeImg2 = pygame.image.load("overworld/single_trees.png")
-TreeImg3 = pygame.image.load("overworld/single_tree.png")
-RockImg = pygame.image.load("overworld/rocks.png")
-DestRock = pygame.image.load("overworld/explodable_rocks.png")
-Oldie = pygame.image.load("misc/old_man.png")
-dungeon_rock = pygame.image.load("overworld/dungeon_rocks.png")
-Water1 = pygame.image.load("overworld/water.png")
-Water2 = pygame.image.load("overworld/water_right.png")
-Water3 = pygame.image.load("overworld/water_right_inverse.png")
-Zelda = pygame.image.load("misc/zelda.png")
-Win = pygame.image.load("misc/final.jpg")
+TreeImg = pygame.image.load("assets/overworld/trees.png")
+TreeImg2 = pygame.image.load("assets/overworld/single_trees.png")
+TreeImg3 = pygame.image.load("assets/overworld/single_tree.png")
+RockImg = pygame.image.load("assets/overworld/rocks.png")
+DestRock = pygame.image.load("assets/overworld/explodable_rocks.png")
+Oldie = pygame.image.load("assets/misc/old_man.png")
+dungeon_rock = pygame.image.load("assets/overworld/dungeon_rocks.png")
+Water1 = pygame.image.load("assets/overworld/water.png")
+Water2 = pygame.image.load("assets/overworld/water_right.png")
+Water3 = pygame.image.load("assets/overworld/water_right_inverse.png")
+Zelda = pygame.image.load("assets/misc/zelda.png")
+Win = pygame.image.load("assets/misc/final.jpg")
 class Link(pygame.sprite.Sprite):
 
     def __init__(self, x, y,DIRECTION,upKeyPressed,downKeyPressed,leftKeyPressed,rightKeyPressed, spacePressed,has_sword,has_bombs):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("link/link_up1.png")
-        self.right1 = pygame.image.load("link/walk_right1.png")
-        self.right2 = pygame.image.load("link/link_right2.png")
-        self.left1 = pygame.image.load("link/link_left1.png")
-        self.left2 = pygame.image.load("link/link_left2.png")
-        self.up1 = pygame.image.load("link/link_up1.png")
-        self.up2 = pygame.image.load("link/link_up2.png")
-        self.down1 = pygame.image.load("link/link_down1.png")
-        self.down2 = pygame.image.load("link/link_down2.png")
-        self.attack_right = pygame.image.load("link/attack_right.png")
-        self.attack_left = pygame.image.load("link/attack_left.png")
-        self.attack_up = pygame.image.load("link/attack_up.png")
-        self.attack_down = pygame.image.load("link/attack_down.png")
+        self.image = pygame.image.load("assets/link/link_up1.png")
+        self.right1 = pygame.image.load("assets/link/walk_right1.png")
+        self.right2 = pygame.image.load("assets/link/link_right2.png")
+        self.left1 = pygame.image.load("assets/link/link_left1.png")
+        self.left2 = pygame.image.load("assets/link/link_left2.png")
+        self.up1 = pygame.image.load("assets/link/link_up1.png")
+        self.up2 = pygame.image.load("assets/link/link_up2.png")
+        self.down1 = pygame.image.load("assets/link/link_down1.png")
+        self.down2 = pygame.image.load("assets/link/link_down2.png")
+        self.attack_right = pygame.image.load("assets/link/attack_right.png")
+        self.attack_left = pygame.image.load("assets/link/attack_left.png")
+        self.attack_up = pygame.image.load("assets/link/attack_up.png")
+        self.attack_down = pygame.image.load("assets/link/attack_down.png")
         self.right_walk = [self.right1,self.right2]
         self.left_walk = [self.left1, self.left2]
         self.up_walk = [self.up1, self.up2]
@@ -238,26 +238,26 @@ class Link(pygame.sprite.Sprite):
             self.current_frame = (self.current_frame + 1) % 2
 class Mob(pygame.sprite.Sprite):
     def __init__(self,x,y,hitpoint,game):
-        self.left1 = pygame.image.load("meanie/0.png")
-        self.left2 = pygame.image.load("meanie/1.png")
-        self.down1 = pygame.image.load("meanie/2.png")
-        self.down2 = pygame.image.load("meanie/3.png")
-        self.right1 = pygame.image.load("meanie/4.png")
-        self.right2 = pygame.image.load("meanie/5.png")
-        self.up1 = pygame.image.load("meanie/6.png")
-        self.up2 = pygame.image.load("meanie/7.png")
+        self.left1 = pygame.image.load("assets/meanie/0.png")
+        self.left2 = pygame.image.load("assets/meanie/1.png")
+        self.down1 = pygame.image.load("assets/meanie/2.png")
+        self.down2 = pygame.image.load("assets/meanie/3.png")
+        self.right1 = pygame.image.load("assets/meanie/4.png")
+        self.right2 = pygame.image.load("assets/meanie/5.png")
+        self.up1 = pygame.image.load("assets/meanie/6.png")
+        self.up2 = pygame.image.load("assets/meanie/7.png")
         self.left_walk = [self.left1,self.left2]
         self.right_walk = [self.right1, self.right2]
         self.up_walk = [self.up1, self.up2]
         self.down_walk = [self.down1, self.down2]
         pygame.sprite.Sprite.__init__(self)
         self.rect = Rect(0,0,48,48)
-        self.image = pygame.image.load("meanie/0.png")
+        self.image = pygame.image.load("assets/meanie/0.png")
         self.rect.x = x
         self.rect.y = y
-        self.one = pygame.image.load("misc/0.png")
-        self.two = pygame.image.load("misc/1.png")
-        self.three= pygame.image.load("misc/2.png")
+        self.one = pygame.image.load("assets/misc/0.png")
+        self.two = pygame.image.load("assets/misc/1.png")
+        self.three= pygame.image.load("assets/misc/2.png")
         self.die = [self.one,self.two,self.three]
         self.ticker = 0
         self.current_frame = 0
@@ -376,13 +376,13 @@ class Mob_Arrow(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.direction = direction
         if self.direction == "right":
-            self.image = pygame.image.load("meanie/arrow/2.png")
+            self.image = pygame.image.load("assets/meanie/arrow/2.png")
         elif self.direction == "left":
-            self.image = pygame.image.load("meanie/arrow/0.png")
+            self.image = pygame.image.load("assets/meanie/arrow/0.png")
         elif self.direction == "up":
-            self.image = pygame.image.load("meanie/arrow/3.png")
+            self.image = pygame.image.load("assets/meanie/arrow/3.png")
         elif self.direction == "down":
-            self.image = pygame.image.load("meanie/arrow/1.png")
+            self.image = pygame.image.load("assets/meanie/arrow/1.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -399,7 +399,7 @@ class Mob_Arrow(pygame.sprite.Sprite):
 class Bomb(pygame.sprite.Sprite):
     def __init__(self, x,y, link):
         pygame.sprite.Sprite.__init__(self)
-        self.image =  pygame.image.load("bombs/bombs.png")
+        self.image =  pygame.image.load("assets/bombs/bombs.png")
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
@@ -414,7 +414,7 @@ class Bomb(pygame.sprite.Sprite):
         self.current_frame = 0
         self.ticker = 0
         self.link = link
-        self.effect = pygame.mixer.Sound("LoZ_Sounds/LOZ_Bomb_Blow.wav")
+        self.effect = pygame.mixer.Sound("assets/LoZ_Sounds/LOZ_Bomb_Blow.wav")
 
     def update(self):
         self.hit_rect = self.image.get_rect()
@@ -482,7 +482,7 @@ class Water(pygame.sprite.Sprite):
 class Door(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("link/walk_right1.png")
+        self.image = pygame.image.load("assets/link/walk_right1.png")
         self.rect = self.image.get_rect()
         self.image.fill(Color("Black"))
         self.rect.x = x
@@ -498,21 +498,21 @@ class Sword(pygame.sprite.Sprite):
 class BombCollectable(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("Bombs/bombs.png")
+        self.image = pygame.image.load("assets/Bombs/bombs.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
 class Text(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("Alone.jpg")
+        self.image = pygame.image.load("assets/Alone.jpg")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
 class Key(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("misc/key.png")
+        self.image = pygame.image.load("assets/misc/key.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -520,7 +520,7 @@ class Key(pygame.sprite.Sprite):
 class Lock(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("misc/lock.png")
+        self.image = pygame.image.load("assets/misc/lock.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -728,7 +728,7 @@ class GameMain():
         self.current_screen = "title"
 
     def main_loop(self):
-        pygame.mixer.music.load("LoZ_Sounds/overworld.ogg")
+        pygame.mixer.music.load("assets/LoZ_Sounds/overworld.ogg")
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(.5)
         while not self.done:
