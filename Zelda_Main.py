@@ -54,7 +54,7 @@ class Link(pygame.sprite.Sprite):
         self.leftKeyPressed = leftKeyPressed
         self.rightKeyPressed = rightKeyPressed
         self.spacePressed = spacePressed
-        self.WALKRATE = 5
+        self.WALKRATE = 15
         self.RIGHT, self.LEFT, self.UP, self.DOWN = "right left up down".split()
         self.action = 'walking'
         self.has_sword = has_sword
@@ -1078,7 +1078,7 @@ Water3 = pygame.image.load("overworld/water_right_inverse.png")
 Zelda = pygame.image.load("misc/zelda.png")
 Win = pygame.image.load("misc/final.jpg")
 class Link(pygame.sprite.Sprite):
-    
+
     def __init__(self, x, y,DIRECTION,upKeyPressed,downKeyPressed,leftKeyPressed,rightKeyPressed, spacePressed,has_sword,has_bombs):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("link/link_up1.png")
@@ -1138,9 +1138,9 @@ class Link(pygame.sprite.Sprite):
         self.bombs = pygame.sprite.Group()
     def walk(self):
         pass
-    
+
     def update(self):
-        
+
         if self.downKeyPressed:
             self.rect.y += 5
             self.image = self.down_walk[self.current_frame]
@@ -1164,12 +1164,12 @@ class Link(pygame.sprite.Sprite):
             for key in key_hit_list:
                 if self.rect.bottom == key.rect.top:
                     self.has_key = True
-                    
+
             for bombitem in bomb_items_hit_list:
                 bombitem.kill()
                 self.has_bombs = True
                 self.item_find.play()
-                    
+
             for lock in lock_hit_list:
                 self.rect.bottom == lock.rect.top
                 if self.has_key:
@@ -1179,8 +1179,8 @@ class Link(pygame.sprite.Sprite):
                 self.enter_door3 = True
                 self.rect.x = 400
                 self.rect.y = 200
-                    
-                    
+
+
         elif self.upKeyPressed:
             self.rect.y -= 5
             self.image = self.up_walk[self.current_frame]
@@ -1216,7 +1216,7 @@ class Link(pygame.sprite.Sprite):
                 bombitem.kill()
                 self.has_bombs = True
                 self.item_find.play()
-                
+
             if door_list:
                 self.enter_door = True
                 self.rect.x = 300
@@ -1225,7 +1225,7 @@ class Link(pygame.sprite.Sprite):
                 self.enter_door2 = True
                 self.rect.x = 400
                 self.rect.y = 500
-                
+
         elif self.leftKeyPressed:
             self.rect.x -= 5
             self.image = self.left_walk[self.current_frame]
@@ -1247,7 +1247,7 @@ class Link(pygame.sprite.Sprite):
             for key in key_hit_list:
                 if self.rect.left == key.rect.right:
                     self.has_key = True
-                    
+
             for bombitem in bomb_items_hit_list:
                 bombitem.kill()
                 self.has_bombs = True
@@ -1297,7 +1297,7 @@ class Link(pygame.sprite.Sprite):
                             #mob.rect.y += 15
                             mob.hitpoint -= 1
 
-            
+
         self.ticker += 1
         if self.ticker % 8 == 0:
             self.current_frame = (self.current_frame + 1) % 2
@@ -1345,7 +1345,7 @@ class Mob(pygame.sprite.Sprite):
         self.effect = pygame.mixer.Sound("LoZ_Sounds/LOZ_Kill.wav")
         self.effect.set_volume(.4)
         self.has_bomb = True
-        
+
     def update(self):
         if self.direction == "right":
             self.image = self.right_walk[self.walk_anim_frame]
@@ -1360,10 +1360,10 @@ class Mob(pygame.sprite.Sprite):
                 self.arrow_t = 0
                 self.arrow_timer = random.randint(60,240)
             self.arrow_t += 1
-            if self.t == self.timer: 
+            if self.t == self.timer:
               self.direction = self.randomDirections[random.randint(0,3)]
               self.t = 0
-            
+
         elif self.direction == "left":
             self.image = self.left_walk[self.walk_anim_frame]
             self.rect.x -= self.x_change
@@ -1415,8 +1415,8 @@ class Mob(pygame.sprite.Sprite):
             if self.t == self.timer:
                 self.direction = self.randomDirections[random.randint(0,3)]
                 self.t = 0
-            
-                
+
+
         if self.hitpoint <= 0:
             self.arrow_t = -1
             self.x_change = 0
@@ -1429,13 +1429,13 @@ class Mob(pygame.sprite.Sprite):
             if self.image == self.die[2]:
                 self.kill()
                 self.effect.play()
-                
+
         self.anim_ticker += 1
         if self.anim_ticker % 10 == 0:
             self.walk_anim_frame = (self.walk_anim_frame + 1) % 2
 
-        
-            
+
+
 class Mob_Arrow(pygame.sprite.Sprite):
     def __init__(self,x,y,direction):
         pygame.sprite.Sprite.__init__(self)
@@ -1451,7 +1451,7 @@ class Mob_Arrow(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        
+
     def update(self):
         if self.direction == "right":
             self.rect.x += 6
@@ -1502,10 +1502,10 @@ class Bomb(pygame.sprite.Sprite):
                 self.effect.play()
                 self.kill()
 
-        
-        
-        
-        
+
+
+
+
 class Wall(pygame.sprite.Sprite):
     def __init__(self,x,y,image):
         pygame.sprite.Sprite.__init__(self)
@@ -1534,7 +1534,7 @@ class DungeonRock(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.destructible = False
-        
+
 class Water(pygame.sprite.Sprite):
     def __init__(self,x,y,image):
         pygame.sprite.Sprite.__init__(self)
@@ -1543,7 +1543,7 @@ class Water(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.destructible = False
-        
+
 class Door(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
@@ -1581,7 +1581,7 @@ class Key(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        
+
 class Lock(pygame.sprite.Sprite):
     def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
@@ -1603,7 +1603,7 @@ class Room(object):
         self.lock_list = pygame.sprite.Group()
         self.bombs_items_list = pygame.sprite.Group()
         self.dungeon = False
-        
+
 class Room1(Room):
     def __init__(self):
         Room.__init__(self)
@@ -1632,25 +1632,25 @@ class Room2(Room):
             self.mob_list.add(mob)
         for key in self.keys:
             self.key_list.add(key)
-        
 
-            
+
+
 class Room3(Room):
     def __init__(self):
         Room.__init__(self)
         walls = [Wall(0,0,TreeImg2), Wall(-400,140,TreeImg2),Wall(-400,280,TreeImg2),Wall(-400,400,TreeImg2), Wall(700,440,TreeImg),Wall(700,553,TreeImg),
                  Wall(500,553,TreeImg),Wall(700,226,TreeImg),Wall(700,113,TreeImg),Wall(700,0,TreeImg),Rock(355,553,True,DestRock),Wall(100,553,TreeImg),Wall(0,553,TreeImg)]
         mobs = [Mob(200,200,1,self),Mob(300,300,1,self),Mob(400,400,1,self)]
-        
+
         #locks = [Lock(400,400)]
         for wall in walls:
             self.wall_list.add(wall)
         for mob in mobs:
             mob.walls = self.wall_list
             self.mob_list.add(mob)
-        
-        
-                     
+
+
+
 class Room4(Room):
     def __init__(self):
         Room.__init__(self)
@@ -1667,7 +1667,7 @@ class Room4(Room):
             self.lock_list.add(lock)
         for door in doors:
             self.door_list2.add(door)
-            
+
 class Room5(Room):
     def __init__(self):
         Room.__init__(self)
@@ -1676,7 +1676,7 @@ class Room5(Room):
                  Wall(500,300,TreeImg3),Wall(200,200,TreeImg3),Wall(200,400,TreeImg3)]
         for wall in walls:
             self.wall_list.add(wall)
-        
+
 class Room6(Room):
     def __init__(self):
         Room.__init__(self)
@@ -1748,15 +1748,15 @@ class FINAL_DUNGEON(Room):
             self.mob_list.add(mob)
         for door in doors:
             self.door_list.add(door)
-        
+
 class GameMain():
     done = False
-   
+
     def __init__(self,width = 800, height = 600):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.init()
-        
-        
+
+
         self.color_x = 252
         self.color_y = 216
         self.color_z = 168
@@ -1764,7 +1764,7 @@ class GameMain():
         pygame.display.set_caption("The Legend of Zelda")
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.clock = pygame.time.Clock()
-        self.link = Link(200,500,"UP",False,False,False,False,False,False,False)        
+        self.link = Link(200,500,"UP",False,False,False,False,False,False,False)
         self.all_sprite_list = pygame.sprite.Group()
         self.all_sprite_list.add(self.link)
         self.rooms = [[Room3(),Room1(),Room2()],
@@ -1783,10 +1783,10 @@ class GameMain():
         self.link.keys = self.rooms[0][2].keys
         self.link.locks = self.current_room.lock_list
 
-        
+
 
         self.current_screen = "title"
-        
+
     def main_loop(self):
         pygame.mixer.music.load("LoZ_Sounds/overworld.ogg")
         pygame.mixer.music.play(-1)
@@ -1811,9 +1811,9 @@ class GameMain():
                 self.handle_events_title()
                 self.draw_title()
             self.clock.tick(60)
-        
+
         pygame.quit()
-        
+
     def draw_title(self):
         self.screen.fill(Color("Grey"))
         logo = pygame.image.load("logo.png")
@@ -1829,7 +1829,7 @@ class GameMain():
             if event.type == KEYDOWN:
                 if event.key == K_RETURN:
                     self.current_screen = "game"
-        
+
     def draw(self):
         if self.current_room.dungeon:
             self.screen.fill(Color("black"))
@@ -1840,7 +1840,7 @@ class GameMain():
         self.current_room.mob_list.draw(self.screen)
         self.current_room.arrows.draw(self.screen)
         self.current_room.item_list.draw(self.screen)
-        
+
         self.current_room.door_list.draw(self.screen)
         self.current_room.door_list2.draw(self.screen)
         self.current_room.door_list3.draw(self.screen)
@@ -1857,7 +1857,7 @@ class GameMain():
                 item.kill()
         self.current_room.door_list.draw(self.screen)
         pygame.display.flip()
-        
+
     def change_room(self):
         if self.link.enter_door:
             self.current_room = self.rooms[2][1]
@@ -1906,7 +1906,7 @@ class GameMain():
                 self.link.mobs = self.current_room.mob_list
                 self.link.bomb_items = self.rooms[2][2].bombs_items_list
                 self.link.doors = self.current_room.door_list
-                
+
         elif self.link.rect.x > 801:
             self.current_x = (self.current_x + 1)
             self.current_room = self.rooms[self.current_y][self.current_x]
@@ -1931,9 +1931,9 @@ class GameMain():
                         bomb.kill()
                 self.link.walls = self.current_room.wall_list
 
-                    
-                    
-            
+
+
+
         elif self.link.rect.x < 0:
             self.current_x = (self.current_x - 1)
             self.current_room = self.rooms[self.current_y][self.current_x]
@@ -1948,7 +1948,7 @@ class GameMain():
             for bomb in self.link.bombs:
                         bomb.kill()
             self.link.rect.x = 800
-            
+
         elif self.link.rect.y < 0:
             self.current_y = (self.current_y + 1)
             self.current_room = self.rooms[self.current_y][self.current_x]
@@ -1963,7 +1963,7 @@ class GameMain():
             for bomb in self.link.bombs:
                         bomb.kill()
             self.link.rect.y = 599
-            
+
         elif self.link.rect.y > 600:
             self.current_y = (self.current_y - 1)
             self.current_room = self.rooms[self.current_y][self.current_x]
@@ -1978,7 +1978,7 @@ class GameMain():
             for bomb in self.link.bombs:
                         bomb.kill()
             self.link.rect.y = 0
-            
+
     def handle_events(self):
         events = pygame.event.get()
         keys = pygame.key.get_pressed()
@@ -2012,7 +2012,7 @@ class GameMain():
                     obj = GameMain()
                     obj.main_loop()
 
-                     
+
                 elif event.key == K_SPACE and self.link.has_sword == True:
                     self.link.spacePressed = True
                     self.link.can_move = False
@@ -2053,31 +2053,31 @@ class GameMain():
                     self.link.effect.play()
                     self.link.action = 'attacking'
 
-                        
+
             elif event.type == KEYUP:
                 if event.key == K_UP:
-                    
+
                     self.link.upKeyPressed = False
                     if self.link.rightKeyPressed:
                         self.link.DIRECTION = self.link.RIGHT
                     elif self.link.leftKeyPressed:
                         self.link.DIRECTION = self.link.LEFT
                 elif event.key == K_DOWN:
-                    
+
                     self.link.downKeyPressed = False
                     if self.link.rightKeyPressed:
                         self.link.DIRECTION = self.link.RIGHT
                     elif self.link.leftKeyPressed:
                         self.link.DIRECTION = self.link.LEFT
                 elif event.key == K_LEFT:
-                    
+
                     self.link.leftKeyPressed = False
                     if self.link.upKeyPressed:
                         self.link.DIRECTION = self.link.UP
                     elif self.link.downKeyPressed:
                         self.link.DIRECTION = self.link.DOWN
                 elif event.key == K_RIGHT:
-                    
+
                     self.link.rightKeyPressed = False
                     if self.link.upKeyPressed:
                         self.link.DIRECTION = self.link.UP
@@ -2115,16 +2115,16 @@ class GameMain():
                         self.link.image = self.link.down1
                         oldRect = self.link.rect
                         self.link.rect = self.link.image.get_rect()
-                        self.link.rect.x = oldRect.x 
+                        self.link.rect.x = oldRect.x
                         self.link.rect.y = oldRect.y -15
                         self.link.downKeyPressed = False
                         self.link.upKeyPressed = False
                         self.link.leftKeyPressed = False
                         self.link.rightKeyPressed = False
                     self.link.action = "walking"
-        
-                    
-                        
+
+
+
 if __name__ == "__main__":
     game = GameMain()
     game.main_loop()
