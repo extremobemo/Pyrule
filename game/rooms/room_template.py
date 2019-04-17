@@ -166,8 +166,8 @@ class Mob(pygame.sprite.Sprite):
         self.y_change = 1
         self.anim_ticker = 0
         self.game = game
-        self.effect = pygame.mixer.Sound("LoZ_Sounds/LOZ_Kill.wav")
-        self.effect.set_volume(.4)
+        #self.effect = pygame.mixer.Sound("LoZ_Sounds/LOZ_Kill.wav")
+        #self.effect.set_volume(.4)
         self.has_bomb = True
 
     def update(self):
@@ -207,7 +207,7 @@ class Mob(pygame.sprite.Sprite):
         elif self.direction == "up":
             self.image = self.up_walk[self.walk_anim_frame]
             self.rect.y -= self.y_change
-            wall_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
+            #wall_hit_list = pygame.sprite.spritecollide(self, self.walls, False)
             for wall in wall_hit_list:
                 self.rect.top = wall.rect.bottom
                 self.direction = self.randomDirections[1]

@@ -1,6 +1,5 @@
 from room_template import *
-
-def build_room_1():
+def build_room():
     room1 = Room()
 
     room1.walls = [Wall(0,0,TreeImg), Wall(256,0,TreeImg),Wall(500,0,TreeImg), Wall((900-256),0,TreeImg), Wall(-160,113,TreeImg),
@@ -10,6 +9,5 @@ def build_room_1():
 
     room1.doors = [Door(300,66)]
     room1.populate(room1.walls, "wall")
-    print(room1.walls)
     room1.populate(room1.doors, "door")
     return room1

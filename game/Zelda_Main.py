@@ -1,7 +1,7 @@
 import pygame,random,math
 from pygame.locals import *
-from Room1 import build_room_1
-from Room2 import build_room_2
+from rooms.Room1 import build_room
+from rooms.Room2 import build_room_2
 TreeImg = pygame.image.load("assets/overworld/trees.png")
 TreeImg2 = pygame.image.load("assets/overworld/single_trees.png")
 TreeImg3 = pygame.image.load("assets/overworld/single_tree.png")
@@ -493,7 +493,7 @@ class Door(pygame.sprite.Sprite):
 class Sword(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("0.png")
+        self.image = pygame.image.load("../0.png")
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -547,7 +547,7 @@ class Room(object):
         if wall_or_door == "door":
             self.door_list = pygame.sprite.Group(lst)
 
-room1 = build_room_1()
+room1 = build_room()
 room2 = build_room_2()
 
 class Room3(Room):
@@ -559,6 +559,7 @@ class Room3(Room):
 
         #locks = [Lock(400,400)]
         for wall in walls:
+
             self.wall_list.add(wall)
         for mob in mobs:
             mob.walls = self.wall_list
@@ -682,7 +683,7 @@ class GameMain():
         self.link = Link(200,500,"UP",False,False,False,False,False,False,False)
         self.all_sprite_list = pygame.sprite.Group()
         self.all_sprite_list.add(self.link)
-        self.rooms = [[Room3(),room1,Room2()],
+        self.rooms = [[Room3(),room1,room2],
                       [Room6(),Room4(), Room5()],
                       [Room7(),Dungeon(),Dungeon2(),FINAL_DUNGEON()]]
         self.current_x = 1
@@ -695,7 +696,7 @@ class GameMain():
         self.link.doors = self.current_room.door_list
         self.link.doors2 = self.current_room.door_list2
         self.link.doors3 = self.rooms[self.current_y][self.current_x].door_list3
-        self.link.keys = self.rooms[0][2].keys
+        self.link.keys = self.rooms[0][2].key_list
         self.link.locks = self.current_room.lock_list
 
 
@@ -731,8 +732,8 @@ class GameMain():
 
     def draw_title(self):
         self.screen.fill(Color("Grey"))
-        logo = pygame.image.load("logo.png")
-        credit = pygame.image.load("credits.png")
+        logo = pygame.image.load("../logo.png")
+        credit = pygame.image.load("../credits.png")
         self.screen.blit(logo,(220,200))
         self.screen.blit(credit,(240,443))
         pygame.display.flip()
@@ -1747,7 +1748,7 @@ class GameMain():
         self.link = Link(200,500,"UP",False,False,False,False,False,False,False)
         self.all_sprite_list = pygame.sprite.Group()
         self.all_sprite_list.add(self.link)
-        self.rooms = [[Room3(),Room1(),Room2()],
+        self.rooms = [[Room3(),room1,room2],
                       [Room6(),Room4(), Room5()],
                       [Room7(),Dungeon(),Dungeon2(),FINAL_DUNGEON()]]
         self.current_x = 1
